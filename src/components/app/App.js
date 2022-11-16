@@ -1,8 +1,8 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 export default function App() {
 
-  const [tareas, setTareas] = useState([])
+  const [tareas, setTareas] = useState(JSON.parse(window.localStorage.getItem('listaTareas')) ?? [])
 
   function agregarALista(nuevaTarea){
     if(!nuevaTarea.trim()) return
@@ -11,7 +11,9 @@ export default function App() {
 
   const [nuevaTarea, setNuevaTarea] = useState('')
 
-  console.log(tareas)
+  useEffect(() => {
+    window.localStorage.setItem('listaTareas', JSON.stringify(tareas))
+  }, [tareas])
 
   return (
     <>
